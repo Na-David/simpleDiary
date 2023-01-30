@@ -15,7 +15,14 @@ const DiaryEditor = () => {
     };
 
     const handleSubmit = () => {
-        console.log(state);
+        if (state.author.length < 1){
+            alert("Please check the publisher.")
+            return ;
+        }
+        if (state.content.length < 5){
+            alert("Please check the content.")
+            return;
+        }
         alert("Saved");
     };
 
