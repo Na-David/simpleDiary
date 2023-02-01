@@ -1,22 +1,21 @@
 import DiaryItem from "./DiaryItem";
 
-const DiaryList = ({diaryList}) => {
-    // console.log(diaryList);
-    return (
-        <div className="DiaryList">
-            <h2>Diary Lists</h2>
-            <h4>There are {diaryList.length} diary(s) in the archive</h4>
-            <div>
-                {diaryList.map((it) => (
-                    <DiaryItem key = {it.id} {...it} />
-                ))}
-            </div>
-        </div>
-    );
+const DiaryList = ({ diaryList }) => {
+  return (
+    <div className="DiaryList">
+      <h2>일기 리스트</h2>
+      <h4>{diaryList.length}개의 일기가 있습니다.</h4>
+      <div>
+        {diaryList.map((it) => (
+          <DiaryItem key={`diaryitem_${it.id}`} {...it} />
+        ))}
+      </div>
+    </div>
+  );
 };
 
 DiaryList.defaultProps = {
-    diaryList: []
+  diaryList: []
 };
 
 export default DiaryList;
