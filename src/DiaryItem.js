@@ -1,3 +1,5 @@
+import {useState} from "react";
+
 const DiaryItem = ({
   onDelete,
   id,
@@ -6,6 +8,18 @@ const DiaryItem = ({
   emotion,
   created_date
 }) => {
+
+  const [isEdit, setIsEdit] = useState(false);
+  const toggleIsEdit = () => {setIsEdit(!isEdit)};
+
+  const [localContent, setLocalContent] = useState("");
+
+  const handleDelete = () => {
+    if (window.confirm(`${id+1}번째 일기를 정말 삭제하시겠습니까?`)) {
+     onDelete(id);
+    }
+  }
+
   return (
     <div className="DiaryItem">
       <div className="info">
@@ -15,16 +29,17 @@ const DiaryItem = ({
         <br />
         <span className="date">{new Date(created_date).toLocaleString()}</span>
       </div>
-      <div className="content">{content}</div>
-      <button
-        onClick={() => {
-          if (window.confirm(`${id}번째 일기를 정말 삭제하시겠습니까?`)) {
-            onDelete(id);
-          }
-        }}
-      >
-        삭제하기
-      </button>
+      <div className="content">
+        {isEdit ? 
+        <>
+        <textarea value={localContent} onChange = {(e) => {setLocalContent(e.target.value)}}/>
+        </> : 
+        <>
+        {content}
+        </>}
+      </div>
+      <button onClick={toggleIsEdit}>Edit</button>
+      <button onClick={handleDelete}> Delete </button>
     </div>
   );
 };
