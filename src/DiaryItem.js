@@ -12,7 +12,7 @@ const DiaryItem = ({
   const [isEdit, setIsEdit] = useState(false);
   const toggleIsEdit = () => {setIsEdit(!isEdit)};
 
-  const [localContent, setLocalContent] = useState("");
+  const [localContent, setLocalContent] = useState(content);
 
   const handleDelete = () => {
     if (window.confirm(`${id+1}번째 일기를 정말 삭제하시겠습니까?`)) {
@@ -38,8 +38,15 @@ const DiaryItem = ({
         {content}
         </>}
       </div>
-      <button onClick={toggleIsEdit}>Edit</button>
-      <button onClick={handleDelete}> Delete </button>
+
+      {isEdit ? 
+      <>
+      <button>Done</button>
+      <button onClick={toggleIsEdit}> Cancel </button></> 
+      : <>
+      <button onClick={toggleIsEdit}> Edit </button>
+      <button onClick={handleDelete}> Delete </button></>}
+      
     </div>
   );
 };
