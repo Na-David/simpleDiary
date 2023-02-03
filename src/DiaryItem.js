@@ -1,6 +1,7 @@
-import {useState} from "react";
+import {useRef, useState} from "react";
 
 const DiaryItem = ({
+  onEdit,
   onDelete,
   id,
   author,
@@ -13,10 +14,29 @@ const DiaryItem = ({
   const toggleIsEdit = () => {setIsEdit(!isEdit)};
 
   const [localContent, setLocalContent] = useState(content);
+  const localContentInput = useRef();
 
   const handleDelete = () => {
     if (window.confirm(`${id+1}번째 일기를 정말 삭제하시겠습니까?`)) {
      onDelete(id);
+    }
+  }
+
+  const handleQuitEdit = () => {
+    setIsEdit(false);
+    setLocalContent(content);
+  }
+  
+  const handleEdit = () => {
+
+    if(localContent.length < 5){
+      localContentInput.current.focus();
+      return;
+    }
+
+    if (window.confirm(`${id+1}번 째 일기를 수정하시겠습니까?`)){
+      onEdit(id, localContent);
+      toggleIsEdit();
     }
   }
 
@@ -32,7 +52,7 @@ const DiaryItem = ({
       <div className="content">
         {isEdit ? 
         <>
-        <textarea value={localContent} onChange = {(e) => {setLocalContent(e.target.value)}}/>
+        <textarea ref = {localContentInput} value={localContent} onChange = {(e) => {setLocalContent(e.target.value)}}/>
         </> : 
         <>
         {content}
@@ -41,8 +61,8 @@ const DiaryItem = ({
 
       {isEdit ? 
       <>
-      <button>Done</button>
-      <button onClick={toggleIsEdit}> Cancel </button></> 
+      <button onClick={handleEdit}>Done</button>
+      <button onClick={handleQuitEdit}> Cancel </button></> 
       : <>
       <button onClick={toggleIsEdit}> Edit </button>
       <button onClick={handleDelete}> Delete </button></>}
