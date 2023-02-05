@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from "react";
+import { useMemo, useEffect, useRef, useState } from "react";
 import { isCompositeComponent } from "react-dom/test-utils";
 import "./App.css";
 import DiaryEditor from "./DiaryEditor";
@@ -61,17 +61,17 @@ function App() {
       data.map((it) => it.id === targetId ? {...it, content: newContent} : it)
     )
   }
-
-  const getDiaryAnalysis = () => {
+ //Memoization Practice
+  const getDiaryAnalysis = useMemo(() => {
     console.log("Diary analysis has been started.");
 
     const goodCount = data.filter((it) => it.emotion >= 3).length;
     const badCount = data.length - goodCount;
     const goodRatio = (goodCount / data.length) * 100;
     return {goodCount, badCount, goodRatio};
-  }
+  },[data.length]);
 
-  const {goodCount, badCount, goodRatio} = getDiaryAnalysis();
+  const {goodCount, badCount, goodRatio} = getDiaryAnalysis;
 
   return (
     <div className="App">
