@@ -1,8 +1,9 @@
 import { useEffect, useRef, useState } from "react";
+import { isCompositeComponent } from "react-dom/test-utils";
 import "./App.css";
 import DiaryEditor from "./DiaryEditor";
 import DiaryList from "./DiaryList";
-import Lifecycle from "./Lifycycle";
+// import Lifecycle from "./Lifycycle";
 
 // https://jsonplaceholder.typicode.com/comments
 
@@ -61,10 +62,25 @@ function App() {
     )
   }
 
+  const getDiaryAnalysis = () => {
+    console.log("Diary analysis has been started.");
+
+    const goodCount = data.filter((it) => it.emotion >= 3).length;
+    const badCount = data.length - goodCount;
+    const goodRatio = (goodCount / data.length) * 100;
+    return {goodCount, badCount, goodRatio};
+  }
+
+  const {goodCount, badCount, goodRatio} = getDiaryAnalysis();
+
   return (
     <div className="App">
       {/* <Lifecycle /> */}
       <DiaryEditor onCreate={onCreate} />
+      <div>Total Diary number : {data.length}</div>
+      <div>Good Diary number : {goodCount}</div>
+      <div>Bad Diary number : {badCount}</div>
+      <div>Good Diary Ratio : {goodRatio}</div>
       <DiaryList onEdit={onEdit} diaryList={data} onDelete={onDelete} />
     </div>
   );
