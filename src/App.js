@@ -3,6 +3,7 @@ import { isCompositeComponent } from "react-dom/test-utils";
 import "./App.css";
 import DiaryEditor from "./DiaryEditor";
 import DiaryList from "./DiaryList";
+import OptimizeTest from "./OptimizeTest";
 // import Lifecycle from "./Lifycycle";
 
 // https://jsonplaceholder.typicode.com/comments
@@ -63,7 +64,7 @@ function App() {
   }
  //Memoization Practice
   const getDiaryAnalysis = useMemo(() => {
-    console.log("Diary analysis has been started.");
+    // console.log("Diary analysis has been started.");
 
     const goodCount = data.filter((it) => it.emotion >= 3).length;
     const badCount = data.length - goodCount;
@@ -76,6 +77,7 @@ function App() {
   return (
     <div className="App">
       {/* <Lifecycle /> */}
+      <OptimizeTest />
       <DiaryEditor onCreate={onCreate} />
       <div>Total Diary number : {data.length}</div>
       <div>Good Diary number : {goodCount}</div>
