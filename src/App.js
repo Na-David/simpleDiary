@@ -4,6 +4,7 @@ import "./App.css";
 import DiaryEditor from "./DiaryEditor";
 import DiaryList from "./DiaryList";
 import OptimizeTest from "./OptimizeTest";
+import OptimizingTest2 from "./OptimizingTest2";
 // import Lifecycle from "./Lifycycle";
 
 // https://jsonplaceholder.typicode.com/comments
@@ -78,6 +79,7 @@ function App() {
     <div className="App">
       {/* <Lifecycle /> */}
       <OptimizeTest />
+      <OptimizingTest2 />
       <DiaryEditor onCreate={onCreate} />
       <div>Total Diary number : {data.length}</div>
       <div>Good Diary number : {goodCount}</div>
