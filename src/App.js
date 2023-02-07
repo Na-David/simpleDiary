@@ -1,10 +1,9 @@
-import { useMemo, useEffect, useRef, useState } from "react";
-import { isCompositeComponent } from "react-dom/test-utils";
+import { useMemo, useEffect, useRef, useState, useCallback } from "react";
 import "./App.css";
 import DiaryEditor from "./DiaryEditor";
 import DiaryList from "./DiaryList";
-import OptimizeTest from "./OptimizeTest";
-import OptimizingTest2 from "./OptimizingTest2";
+// import OptimizeTest from "./OptimizeTest";
+// import OptimizingTest2 from "./OptimizingTest2";
 // import Lifecycle from "./Lifycycle";
 
 // https://jsonplaceholder.typicode.com/comments
@@ -36,7 +35,7 @@ function App() {
     getData();  
   },[])
 
-  const onCreate = (author, content, emotion) => {
+  const onCreate = useCallback((author, content, emotion) => {
     const created_date = new Date().getTime();
     const newItem = {
       author,
@@ -49,7 +48,7 @@ function App() {
     dataId.current += 1;
 
     setData([newItem, ...data]);
-  };
+  },[data]);
 
   const onDelete = (targetId) => {
     const newDiaryList = data.filter(
@@ -78,8 +77,8 @@ function App() {
   return (
     <div className="App">
       {/* <Lifecycle /> */}
-      <OptimizeTest />
-      <OptimizingTest2 />
+      {/* <OptimizeTest /> */}
+      {/* <OptimizingTest2 /> */}
       <DiaryEditor onCreate={onCreate} />
       <div>Total Diary number : {data.length}</div>
       <div>Good Diary number : {goodCount}</div>

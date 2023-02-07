@@ -17,7 +17,7 @@ const DiaryItem = ({
   const localContentInput = useRef();
 
   const handleDelete = () => {
-    if (window.confirm(`${id+1}번째 일기를 정말 삭제하시겠습니까?`)) {
+    if (window.confirm(`${id}번째 일기를 정말 삭제하시겠습니까?`)) {
      onDelete(id);
     }
   }
