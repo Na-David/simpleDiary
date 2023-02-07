@@ -47,8 +47,8 @@ function App() {
 
     dataId.current += 1;
 
-    setData([newItem, ...data]);
-  },[data]);
+    setData((data) => [newItem, ...data]);
+  },[]);
 
   const onDelete = (targetId) => {
     const newDiaryList = data.filter(
