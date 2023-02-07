@@ -1,9 +1,9 @@
 import React, { useEffect, useRef, useState } from "react";
 
 const DiaryEditor = ({ onCreate }) => {
-  useEffect(() => {
-    console.log("Diary Editor is Rendering now");
-  });
+  // useEffect(() => {
+  //   console.log("Diary Editor is Rendering now");
+  // });
   
   const authorInput = useRef();
 
