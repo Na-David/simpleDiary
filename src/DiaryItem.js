@@ -12,7 +12,7 @@ const DiaryItem = ({
 
   useEffect(() => {
     console.log(`${id} re-rendering now`);
-  })
+  });
 
   const [isEdit, setIsEdit] = useState(false);
   const toggleIsEdit = () => {setIsEdit(!isEdit)};
