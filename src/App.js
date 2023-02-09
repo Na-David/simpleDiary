@@ -1,4 +1,4 @@
-import { useMemo, useEffect, useRef, useCallback, useReducer } from "react";
+import React, { useMemo, useEffect, useRef, useCallback, useReducer } from "react";
 import "./App.css";
 import DiaryEditor from "./DiaryEditor";
 import DiaryList from "./DiaryList";
@@ -23,10 +23,11 @@ const reducer = (state, action) => {
       return state.map((it) => it.id === action.targetId? {...it, content: action.newContent} : it)
     }
     default : return state;
-    
   }
-
 }
+
+export const DiaryStateContext = React.createContext();
+export const DiaryDispatchContext = React.createContext();
 
 const App = () => {
   // const [data, setData] = useState([]);
@@ -74,6 +75,10 @@ const App = () => {
     dispatch({type: "EDIT", targetId, newContent})
   },[]);
 
+  const memoizedDispatches = useMemo(() => {
+    return {onCreate, onDelete, onEdit};
+  },[]);
+
  //Memoization Practice
   const getDiaryAnalysis = useMemo(() => {
     // console.log("Diary analysis has been started.");
@@ -87,18 +92,24 @@ const App = () => {
   const {goodCount, badCount, goodRatio} = getDiaryAnalysis;
 
   return (
-    <div className="App">
-      {/* <Lifecycle /> */}
-      {/* <OptimizeTest /> */}
-      {/* <OptimizingTest2 /> */}
-      <DiaryEditor onCreate={onCreate} />
-      <div>Total Diary number : {data.length}</div>
-      <div>Good Diary number : {goodCount}</div>
-      <div>Bad Diary number : {badCount}</div>
-      <div>Good Diary Ratio : {goodRatio}</div>
-      <DiaryList onEdit={onEdit} diaryList={data} onDelete={onDelete} />
-    </div>
+    <DiaryStateContext.Provider value={data}>
+      <DiaryDispatchContext.Provider value={memoizedDispatches}>
+
+        <div className="App">
+          <DiaryEditor onCreate={onCreate} />
+            <div>Total Diary number : {data.length}</div>
+            <div>Good Diary number : {goodCount}</div>
+            <div>Bad Diary number : {badCount}</div>
+            <div>Good Diary Ratio : {goodRatio}</div>
+          <DiaryList onEdit={onEdit} onDelete={onDelete} />
+       </div>
+     </DiaryDispatchContext.Provider>
+    </DiaryStateContext.Provider>
+
   );
 }
 
 export default App;
+
+
+// removed - props drilling 
