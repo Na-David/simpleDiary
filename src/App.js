@@ -105,11 +105,7 @@ const App = () => {
        </div>
      </DiaryDispatchContext.Provider>
     </DiaryStateContext.Provider>
-
   );
 }
 
 export default App;
-
-
-// removed - props drilling 
