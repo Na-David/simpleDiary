@@ -27,6 +27,7 @@ const reducer = (state, action) => {
 }
 
 export const DiaryStateContext = React.createContext();
+export const DiaryDispatchContext = React.createContext();
 
 const App = () => {
   // const [data, setData] = useState([]);
@@ -74,6 +75,10 @@ const App = () => {
     dispatch({type: "EDIT", targetId, newContent})
   },[]);
 
+  const memoizedDispatches = useMemo(() => {
+    return {onCreate, onDelete, onEdit};
+  },[]);
+
  //Memoization Practice
   const getDiaryAnalysis = useMemo(() => {
     // console.log("Diary analysis has been started.");
@@ -88,15 +93,17 @@ const App = () => {
 
   return (
     <DiaryStateContext.Provider value={data}>
+      <DiaryDispatchContext.Provider value={memoizedDispatches}>
 
-    <div className="App">
-      <DiaryEditor onCreate={onCreate} />
-      <div>Total Diary number : {data.length}</div>
-      <div>Good Diary number : {goodCount}</div>
-      <div>Bad Diary number : {badCount}</div>
-      <div>Good Diary Ratio : {goodRatio}</div>
-      <DiaryList onEdit={onEdit} diaryList={data} onDelete={onDelete} />
-    </div>
+        <div className="App">
+          <DiaryEditor onCreate={onCreate} />
+            <div>Total Diary number : {data.length}</div>
+            <div>Good Diary number : {goodCount}</div>
+            <div>Bad Diary number : {badCount}</div>
+            <div>Good Diary Ratio : {goodRatio}</div>
+          <DiaryList onEdit={onEdit} onDelete={onDelete} />
+       </div>
+     </DiaryDispatchContext.Provider>
     </DiaryStateContext.Provider>
 
   );
