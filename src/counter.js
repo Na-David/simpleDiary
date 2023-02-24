@@ -1,9 +1,10 @@
 import React, {useState} from 'react';
+import OddEven from './OddEven';
 
 
-const COunter = () => {
+const Counter = (props) => {
 
-    const [count,setCount] = useState(0);
+    const [count,setCount] = useState(props.initialValue);
 
     const onIncrease = () => {
         setCount(count + 1);
@@ -17,8 +18,11 @@ const COunter = () => {
             <h2>{count}</h2>
             <button onClick={onIncrease}>+</button>
             <button onClick={onDecrease}>-</button>
+            <OddEven count = {count} />
         </div>
     )
 }
 
-export default COunter;
+Counter.defalutProps = { initialValue : 100};
+
+export default Counter;

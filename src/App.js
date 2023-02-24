@@ -1,15 +1,16 @@
 import './App.css';
-import COunter from './counter';
+import Counter from './counter';
 import MyHeader from './MyHeader';
+import Container from './Container';
 
 function App() {
   return (
-    <div className="App">
-        <MyHeader />
-        <COunter />
-        <h2>Hello World</h2>
-        <b id='bold_text'>React.js</b>
-    </div>
+        <Container>
+          <div>
+            <MyHeader />
+            <Counter initialValue = {10} />
+          </div>
+        </Container>
   );
 }
 
