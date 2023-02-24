@@ -1,11 +1,12 @@
 import './App.css';
+import MyHeader from './MyHeader';
 
 function App() {
   return (
     <div className="App">
-      <header className="App-header">
+        <MyHeader />
         <h2>Hello World</h2>
-      </header>
+        <b id='bold_text'>React.js</b>
     </div>
   );
 }
