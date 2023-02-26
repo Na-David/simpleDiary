@@ -49,6 +49,7 @@ function App() {
       id : dataId.current
     }
     dataId.current += 1;
+    setData([newItem, ...data ])
   }
 
   return (
