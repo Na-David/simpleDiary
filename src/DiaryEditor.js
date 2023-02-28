@@ -5,17 +5,19 @@ const DiaryEditor = ({onCreate}) => {
     const authorInput = useRef();
     const contentInput = useRef();
 
+    const dataId = useRef();
+
     const [state, setState] = useState({
         author : '',
         content : '',
-        emotion : 1,
+        emotion : 5,
     });
 
     const handleChangeState = (e) => {
         setState({
             ...state,
             [e.target.name]: e.target.value
-        })
+        });
     }
 
     const handleSubmit = () => {
