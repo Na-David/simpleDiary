@@ -7,12 +7,10 @@ const DiaryItem = ({author, content, created_date, emotion, id, onDelete}) => {
             </div>
             <div className="content">{content}</div>
             <button onClick={() => {
-
                 console.log(id);
                 if (window.confirm("really?")){
                     onDelete(id);
                 }
-                
             }}>Delete</button>
         </div>
     )

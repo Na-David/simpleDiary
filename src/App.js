@@ -54,6 +54,8 @@ function App() {
 
   const onDelete = (targetId) => {
     console.log("삭제되었습니다");
+    const newDiaryList = data.filter((it) => it.id !== targetId);
+    setData(newDiaryList);
   }
 
   return (
